@@ -1,0 +1,11 @@
+[versions]
+exposed = "0.54.0"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "2.0.20" }
+
+[libraries]
+kotlin-telegram-bot = { module = "io.github.kotlin-telegram-bot.kotlin-telegram-bot:telegram", version = "6.2.0" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version = "2.0.16" }
+exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
+exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
