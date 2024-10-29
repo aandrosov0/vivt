@@ -5,9 +5,7 @@ import com.github.kotlintelegrambot.dispatcher.message
 import com.github.kotlintelegrambot.entities.ChatId
 import daos.DAO
 import kotlinx.coroutines.Runnable
-import models.Conversation
 import models.ExposedReview
-import models.ReviewConversation
 import models.russianName
 
 class Bot(
@@ -59,7 +57,7 @@ class Bot(
     }
 
     private fun MessageHandlerEnvironment.handleLeaveReviewCommand() {
-        val review = ReviewConversation(message.chat.id, ::registerReview)
+        val review = ReviewConversation(message.chat.id)
         conversations.add(review)
         review.onMessage(this)
     }

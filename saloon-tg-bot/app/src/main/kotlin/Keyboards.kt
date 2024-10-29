@@ -32,5 +32,10 @@ class Keyboards {
                 listOf(listOf(KeyboardButton("Прислать номер", requestContact = true))),
                 resizeKeyboard = true
             )
+
+        fun generateKeyboard(rows: List<String>) =
+            KeyboardReplyMarkup.createSimpleKeyboard(
+                buildList { rows.forEach { add(listOf(it)) } }
+            )
     }
 }

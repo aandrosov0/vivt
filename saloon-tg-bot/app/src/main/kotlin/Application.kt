@@ -3,5 +3,8 @@ import org.jetbrains.exposed.sql.Database
 
 fun main() {
     Database.connect("jdbc:sqlite:sample.db")
-    Bot("7162702245:AAHv8oIZIM-MBHgBvxBKa-OlDcMGJpAJGr4", ReviewDAO()).run()
+    Bot(
+        token = "7162702245:AAEXzJkjjgdx94jrCb0ScsrSgxcc6xSiaU0",
+        reviewDAO = ReviewDAO()
+    ).run()
 }
