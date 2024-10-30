@@ -3,7 +3,9 @@ package models
 enum class Service {
     MAKEUP,
     HAIR_SALON,
-    BODY_AND_ART
+    BODY_AND_ART;
+
+    companion object
 }
 
 val Service.russianName
@@ -13,7 +15,7 @@ val Service.russianName
         Service.BODY_AND_ART -> "Боди-арт"
     }
 
-fun serviceFromRussianName(name: String): Service {
+fun Service.Companion.fromRussianName(name: String): Service {
     var currentService: Service? = null
     Service.entries.forEach { service ->
         if (name == service.russianName) {
@@ -26,5 +28,5 @@ fun serviceFromRussianName(name: String): Service {
         throw IllegalArgumentException("Service with name $name cannot be found!")
     }
 
-    return currentService!!
+    return currentService
 }

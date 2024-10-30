@@ -48,7 +48,7 @@ class Bot(
             bot.sendMessage(
                 chatId = ChatId.fromId(message.chat.id),
                 text = """
-                    Отзыв от ${it.reviewer} (${it.phone})
+                    Отзыв от ${it.phone.name} (${it.phone.phone})
                     Услуга: ${it.service.russianName}
                     Качество: ${it.quality}
                 """.trimIndent()
@@ -57,7 +57,10 @@ class Bot(
     }
 
     private fun MessageHandlerEnvironment.handleLeaveReviewCommand() {
-        val review = ReviewConversation(message.chat.id)
+        val review = ReviewConversation(message.chat.id) {
+            registerReview(message.chat.id, it)
+            copy(message = message.copy(text = "")).handleMessage()
+        }
         conversations.add(review)
         review.onMessage(this)
     }

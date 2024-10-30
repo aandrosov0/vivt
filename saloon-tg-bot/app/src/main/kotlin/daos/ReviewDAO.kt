@@ -1,6 +1,7 @@
 package daos
 
 import models.ExposedReview
+import models.Phone
 import models.Service
 import org.jetbrains.exposed.dao.id.LongIdTable
 import org.jetbrains.exposed.sql.*
@@ -25,8 +26,8 @@ class ReviewDAO(private val database: Database? = null) : DAO<ExposedReview> {
         Reviews.insert {
             it[service] = obj.service
             it[quality] = obj.quality
-            it[phone] = obj.phone
-            it[reviewer] = obj.reviewer
+            it[phone] = obj.phone.phone
+            it[reviewer] = obj.phone.name
         }[Reviews.id].value
     }
 
@@ -38,8 +39,7 @@ class ReviewDAO(private val database: Database? = null) : DAO<ExposedReview> {
                     id = it[Reviews.id].value,
                     service = it[Reviews.service],
                     quality = it[Reviews.quality],
-                    phone = it[Reviews.phone],
-                    reviewer = it[Reviews.reviewer]
+                    phone = Phone(it[Reviews.phone], it[Reviews.reviewer]),
                 )
             }.singleOrNull()
     }
@@ -51,8 +51,7 @@ class ReviewDAO(private val database: Database? = null) : DAO<ExposedReview> {
                     id = it[Reviews.id].value,
                     service = it[Reviews.service],
                     quality = it[Reviews.quality],
-                    phone = it[Reviews.phone],
-                    reviewer = it[Reviews.reviewer]
+                    phone = Phone(it[Reviews.phone], it[Reviews.reviewer]),
                 )
             }.toList()
     }
@@ -61,8 +60,8 @@ class ReviewDAO(private val database: Database? = null) : DAO<ExposedReview> {
         Reviews.update({ Reviews.id eq id }) {
             it[service] = obj.service
             it[quality] = obj.quality
-            it[phone] = obj.phone
-            it[reviewer] = obj.reviewer
+            it[phone] = obj.phone.phone
+            it[reviewer] = obj.phone.name
         } != 0
     }
 
